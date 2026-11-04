@@ -16,3 +16,5 @@ instructor/
 sessions/
 *.pptx
 *Instructor_Pack*
+# tokenizer files downloaded by tiktoken (re-downloaded on demand)
+.tiktoken_cache/
