@@ -49,9 +49,29 @@ The first time the notebook counts tokens, `tiktoken` downloads its dictionary f
 
 ---
 
-## Git and your work repository
+## Git and your work repository (`mywork`)
 
-Today Git is one command: `git clone`. Commits, branches and pushing are covered by the Git & GitHub webinar — watch it before **Session 14**, when you create your own work repository **`adv-genai-work`** next to this one in `Documents` and start submitting from it. Never put one repository inside the other, and never push your own work to this one.
+You use two repositories, in two directions:
+
+| Repository | Where | What you do there |
+|---|---|---|
+| **Course repository** (this one) | `Documents\adv-genai` | `git pull` at the start of every session. Never commit or push here. |
+| **Your work repository** | `Documents\adv-genai\mywork` | Everything you build in class. `git add` → `git commit` → `git push` to **your own** GitHub. |
+
+`mywork` sits inside this folder but is its own repository with its own history. This repository ignores it (`mywork/` is in `.gitignore`), so the two never mix.
+
+**Set it up once** (Git identity first if this laptop has never committed: `git config --global user.name "Your Name"` and `git config --global user.email "you@example.com"`):
+
+| # | Step | Command |
+|---|---|---|
+| 1 | On github.com create an **empty** repository (no README, no .gitignore), e.g. `adv-genai-work` | — |
+| 2 | Create the folder and make it a repository | `cd ~\Documents\adv-genai` · `mkdir mywork` · `cd mywork` · `git init -b main` |
+| 3 | First commit | create `notes.md` · `git add notes.md` · `git commit -m "Start my work repository"` |
+| 4 | Link it to your GitHub repository and push | `git remote add origin https://github.com/<you>/adv-genai-work.git` · `git push -u origin main` |
+
+The first push opens a browser window to sign in to GitHub once (Git Credential Manager). Already have `mywork` from an earlier session? Check with `git remote -v` inside it: if it lists your GitHub repository, you are done.
+
+**Every session:** `git pull` in `adv-genai` · work inside `mywork` · end with `git add` → `git commit -m "..."` → `git push` inside `mywork`. Commands run from `mywork` still find the `.env` in `adv-genai`, because `load_dotenv()` searches parent folders; never create a second `.env` inside `mywork`.
 
 **Secrets:** `.env` is in `.gitignore`, so `git add` ignores it. If a key ever reaches a commit it is public within minutes — revoke it in the Groq console and create a new one.
 
@@ -92,6 +112,7 @@ module01/reading_tokens.md        Session 9b pre-read
 module01/terms_s09b.md            every new term from Session 9b, and where it comes back
 cheatsheet/python-for-agents.md   the six Python patterns agents use
 guides/Environment_Setup_Guide.docx  step-by-step setup guide with every fix (Session 9a)
+mywork/                           your own work repository (ignored by this one; pushed to your GitHub)
 .env.example                      copy to .env
 pyproject.toml + uv.lock          pinned dependencies (uv sync)
 ```

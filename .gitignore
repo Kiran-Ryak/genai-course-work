@@ -1,5 +1,7 @@
 # secrets — never committed
 .env
+# each student's own work repository (its own Git history, pushed to their own GitHub)
+mywork/
 # environment and caches (uv sync recreates them)
 .venv/
 __pycache__/
